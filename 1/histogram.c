@@ -1,4 +1,3 @@
-// TODO - finish this
 #include <stdio.h>
 
 #define MAXLENGTH 45
@@ -22,9 +21,10 @@ int main()
     else
       ++currlen;
 
-  printf("longest: %d\n", longest);
+  printf("length\t");
+  printf("count\n\n");
 
-  for (i = 1; i < longest; ++i)
+  for (i = 1; i <= longest; ++i)
   {
     printf("%d: \t", i);
     currlen = nlength[i];
