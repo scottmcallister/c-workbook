@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 void escape(char * s, char * t);
+void unescape(char * s, char * t);
 
 int main()
 {
@@ -13,10 +14,13 @@ int main()
 
   printf("Escaped string: %s\n", output);
 
+  unescape(str, output);
+
+  printf("Unescaped string: %s\n", str);
+
   return 0;
 }
 
-// escape: converts characters like newline and tab into visible escape sequences
 void escape(char * s, char * t)
 {
   int i, j;
@@ -42,23 +46,30 @@ void escape(char * s, char * t)
   s[j] = '\0';
 }
 
-// void escape(char[] s, char[] t)
-// {
-//   int i = 0;
-//   char curr = s[i];
-// 
-//   while(s >= 'a') {
-//     switch(curr) {
-//       case '\n':
-//         t[i] = '\n';
-//         break;
-//       case '\t':
-//         t[i] = '\n';
-//         break;
-//       default:
-//         t[i] = curr
-//     }
-//     i++;
-//     curr = s[i];
-//   }
-// }
+void unescape(char * s, char * t)
+{
+  int i, j;
+  i = j = 0;
+
+  while(t[i] != '\0') {
+    if (t[i] == '\\') {
+      switch(t[++i]) {
+        case 'n':
+          s[j] = '\n';
+          break;
+        case 't':
+          s[j] = '\t';
+          break;
+        default:
+          s[j++] = '\\';
+          s[j] = t[i];
+          break;
+      }
+    } else {
+      s[j] = t[i];
+    }
+    j++;
+    i++;
+  }
+  s[j] = t[i];
+}
