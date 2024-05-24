@@ -5,8 +5,8 @@ void unescape(char * s, char * t);
 
 int main()
 {
-  char str[50] = "Hello \t there\n";
-  char output[51];
+  char str[] = "Hello \t there\n";
+  char output[20];
   
   printf("Original string:\n %s\n\n", str);
 
