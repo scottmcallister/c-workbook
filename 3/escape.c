@@ -8,15 +8,13 @@ int main()
   char str[50] = "Hello \t there\n";
   char output[51];
   
-  printf("Original string: %s\n", str);
+  printf("Original string:\n %s\n\n", str);
 
   escape(output, str);
-
-  printf("Escaped string: %s\n", output);
+  printf("Escaped string:\n %s\n\n", output);
 
   unescape(str, output);
-
-  printf("Unescaped string: %s\n", str);
+  printf("Unescaped string:\n %s\n\n", str);
 
   return 0;
 }
