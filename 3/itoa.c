@@ -1,10 +1,22 @@
 #include <stdio.h>
+#include <string.h>
 
-void itoa(int n, char s[]);
+void itoa(int n, char s[], int min_w);
+void reverse(char s[]);
+
 
 int main()
 {
-    
+  int n = 125;
+  int w = 10;
+  char str[100];
+
+  itoa(n, str, w);
+ 
+  printf("%s", str);
+
+  return 0;
+}   
 
 void itoa(int n, char s[], int min_w)
 {
