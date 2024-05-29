@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <math.h>
+#include <errno.h>
 
 #define MAXOP 100
 #define NUMBER '0'
@@ -63,6 +65,26 @@ int main()
       break;
     case 'c':
       clear();
+      break;
+    case 'S':
+      push(sin(pop()));
+      break;
+    case 'E':
+      op2 = exp(pop());
+      if (op2 != HUGE_VAL && op2 != -HUGE_VAL && errno != ERANGE)
+        push(op2);
+      else
+        printf("error: out of range: %g\n", op2), errno = 0;
+      break;
+    case 'P':
+      op2 = pop();
+      op2 = pow(op2, pop());
+      if (errno == EDOM)
+        printf("error: see domain of pow function\n"), errno = 0;
+      else if (errno == ERANGE && (op2 == HUGE_VAL || op2 == -HUGE_VAL))
+        printf("error: out of range: %g\n", op2), errno = 0;
+      else
+        push(op2);
       break;
     case '\n':
       printf("\t%.8g\n", pop());
