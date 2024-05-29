@@ -12,6 +12,10 @@ void push(double);
 double pop(void);
 int getch(void);
 void ungetch(int);
+double print_top(void);
+void duplicate(void);
+void swap(void);
+void clear(void);
 
 int main()
 {
@@ -47,6 +51,18 @@ int main()
         push((int)pop() % (int)op2);
       else
         printf("error: can't divide by zero\n");
+      break;
+    case 'p':
+      print_top();
+      break;
+    case 'd':
+      duplicate();
+      break;
+    case 's':
+      swap();
+      break;
+    case 'c':
+      clear();
       break;
     case '\n':
       printf("\t%.8g\n", pop());
@@ -126,4 +142,40 @@ void ungetch(int c)
     printf("ungetch: too many characters\n");
   else
     buf[bufp++] = c;
+}
+
+double print_top(void)
+{
+  if (sp > 0)
+    return val[sp - 1];
+  else {
+    printf("error: stack empty\n");
+    return 0.0;
+  }
+}
+
+void duplicate(void)
+{
+  push(print_top());
+}
+
+void swap(void)
+{
+  if (sp < 2) {
+    printf("error: not enough elements to swap\n");
+    return;
+  }
+  double first, second;
+  first = pop();
+  second = pop();
+  push(first);
+  push(second);
+}
+
+void clear(void)
+{
+  while (--sp >= 0) {
+    val[sp] = 0.0;
+  }
+  sp = 0;
 }
