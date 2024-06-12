@@ -20,7 +20,6 @@ int strend(char *s, char *t)
 {
   int len = 0;
   int end_match = 0;
-  // go to end of s
   while (*s != '\0')
     s++;
   while (*t != '\0') {
